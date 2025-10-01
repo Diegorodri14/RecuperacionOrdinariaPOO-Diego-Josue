@@ -24,9 +24,11 @@ public class ActoresController {
 
     @Autowired
     private ActoresService service;
+
     @GetMapping("/VerActores")
     public ResponseEntity<List<ActoresDTO>> ObtenerActor(){
-        return ResponseEntity.ok(service.ObtenerActor());
+        List<ActoresDTO> lista = service.ObtenerActor();
+        return ResponseEntity.ok(lista);
     }
 
 
