@@ -1,0 +1,13 @@
+package RecuperacionOrd_Diego_Josue.Diego_Josue_Recuperacion;
+
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+
+public class ServletInitializer extends SpringBootServletInitializer {
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(DiegoJosueRecuperacionApplication.class);
+	}
+
+}
