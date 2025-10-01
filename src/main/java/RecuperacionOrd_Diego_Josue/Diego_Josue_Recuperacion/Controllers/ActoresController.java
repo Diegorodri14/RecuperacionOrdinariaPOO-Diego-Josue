@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,6 +75,31 @@ public class ActoresController {
             return ResponseEntity.internalServerError().body(Map.of(
                     "status", "Error",
                     "message", "Error al actualizar",
+                    "details", e.getMessage()
+            ));
+        }
+    }
+
+    @DeleteMapping("/EliminarActor/{id}")
+    public ResponseEntity<?> EliminarActor (@PathVariable Long id)
+    {
+        try{
+            if (!service.BorrarActor(id)){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of(
+                        "Error", "NOT FOUND",
+                        "Mensaje", "El actor no fue ser encontrado",
+                        "timestamp", Instant.now().toString()
+
+                ));
+            }
+            return ResponseEntity.ok().body(Map.of(
+                    "status", "Success",
+                    "mensaje", "el actor fue eliminado"
+            ));
+        }catch (Exception e) {
+            return ResponseEntity.internalServerError().body(Map.of(
+                    "status", "Error",
+                    "mensaje", "Error al eliminar",
                     "details", e.getMessage()
             ));
         }
